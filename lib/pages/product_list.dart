@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app_flutter/global_variables.dart';
-import 'package:shopping_app_flutter/product_card.dart';
-import 'package:shopping_app_flutter/product_details_page.dart';
+import 'package:shopping_app_flutter/widgets/product_card.dart';
+import 'package:shopping_app_flutter/pages/product_details_page.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
@@ -46,6 +46,10 @@ class ProductListState extends State<ProductList> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+
+    print("size: $size");
+
     return SafeArea(
       child: Column(
         children: [
@@ -123,10 +127,41 @@ class ProductListState extends State<ProductList> {
           ),
 
           // Products List
+          // Expanded(
+          //   child: Padding(
+          //     padding: EdgeInsets.all(10),
+          //     child: ListView.builder(
+          //       itemCount: products.length,
+          //       itemBuilder: (context, index) {
+          //         final product = products[index];
+
+          //         return GestureDetector(
+          //           onTap: () {
+          //             goToProductDetailsPage(index);
+          //           },
+
+          //           child: ProductCard(
+          //             title: product.title,
+          //             price: product.price,
+          //             image: product.imageUrl,
+          //             backgroundColor: index.isEven
+          //                 ? .fromRGBO(216, 240, 253, 1)
+          //                 : .fromRGBO(235, 245, 250, 1),
+          //           ),
+          //         );
+          //       },
+          //     ),
+          //   ),
+          // ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.all(10),
-              child: ListView.builder(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: size.width >= 768 ? 2 : 1,
+                  crossAxisSpacing: 20,
+                  childAspectRatio: 1.75,
+                ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   final product = products[index];

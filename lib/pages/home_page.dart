@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app_flutter/cart_page.dart';
+import 'package:shopping_app_flutter/pages/cart_page.dart';
 
 import 'package:shopping_app_flutter/main.dart';
 
 import 'package:glass_liquid_navbar/glass_liquid_navbar.dart';
-import 'package:shopping_app_flutter/product_list.dart';
+import 'package:shopping_app_flutter/pages/product_list.dart';
 
 class HomePageState extends State<HomePage> {
   int _index = 0;

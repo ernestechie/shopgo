@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_app_flutter/cart_provider.dart';
-import 'package:shopping_app_flutter/home_page.dart';
+import 'package:shopping_app_flutter/providers/cart_provider.dart';
+import 'package:shopping_app_flutter/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,15 +13,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) {
-        return CartProvider();
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) {
+            return CartProvider();
+          },
+        ),
+      ],
       child: MaterialApp(
         title: 'Shopgo',
         theme: ThemeData(
-          colorScheme: .fromSeed(seedColor: Colors.teal),
-          // colorScheme: ColorScheme.dark(),
           inputDecorationTheme: const InputDecorationTheme(
             hintStyle: TextStyle(fontWeight: .bold, fontSize: 16),
             prefixIconColor: .fromRGBO(100, 100, 100, 1),

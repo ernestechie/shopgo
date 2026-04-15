@@ -69,22 +69,3 @@ final List<Product> products = [
     imageUrl: 'assets/images/shoes_4.png',
   ),
 ];
-
-final cart = [
-  {
-    "id": '3',
-    "title": "Beta Women's Shoe",
-    "price": 81000,
-    "company": "Beta",
-    "size": 8,
-    "imageUrl": 'assets/images/shoes_3.png',
-  },
-  {
-    "id": '4',
-    "title": "Jordan Shoe",
-    "price": 142000,
-    "company": "Nike",
-    "size": 8,
-    "imageUrl": 'assets/images/shoes_4.png',
-  },
-];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_app_flutter/cart_provider.dart';
+import 'package:shopping_app_flutter/providers/cart_provider.dart';
 import 'package:shopping_app_flutter/global_variables.dart';
 
 class ProductDetailsPage extends StatefulWidget {
@@ -25,12 +25,32 @@ class ProductDetailsPageState extends State<ProductDetailsPage> {
 
   // Add product to cart
   void onAddToCart() {
-    Provider.of<CartProvider>(
-      context,
-      listen: false,
-    ).addProduct(widget.product);
+    CartItem newItem = CartItem(
+      id: widget.product.id,
+      title: widget.product.title,
+      price: widget.product.price,
+      company: widget.product.company,
+      imageUrl: widget.product.imageUrl,
+      size: widget.product.sizes[selectedSizeIndex],
+    );
 
-    print("hello");
+    context.read<CartProvider>().addProduct(newItem);
+
+    // Show success message toast
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          spacing: 8,
+          children: [
+            Icon(Icons.check, color: Colors.greenAccent),
+            Text(
+              "Added ${newItem.title} to cart!",
+              style: TextStyle(fontWeight: .bold, fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -49,9 +69,9 @@ class ProductDetailsPageState extends State<ProductDetailsPage> {
           const Spacer(),
           Padding(
             padding: EdgeInsets.all(20),
-            child: Image.asset(widget.product.imageUrl),
+            child: Image.asset(widget.product.imageUrl, width: 300),
           ),
-          const Spacer(flex: 2),
+          const Spacer(),
           Container(
             height: 250,
             decoration: BoxDecoration(
@@ -85,7 +105,6 @@ class ProductDetailsPageState extends State<ProductDetailsPage> {
                               color: selectedSizeIndex == index
                                   ? Colors.white
                                   : Colors.black,
-                              fontWeight: .bold,
                             ),
                           ),
                           onTap: () {
@@ -101,22 +120,20 @@ class ProductDetailsPageState extends State<ProductDetailsPage> {
                   padding: EdgeInsets.all(10),
                   child: ElevatedButton.icon(
                     label: Text(
-                      "Add to cart",
-                      style: TextStyle(
-                        fontWeight: .bold,
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
+                      "Add to bag",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     icon: Icon(
-                      Icons.shopping_cart,
+                      Icons.shopping_bag,
                       size: 20,
                       color: Colors.white,
                     ),
                     onPressed: onAddToCart,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
-                      minimumSize: const Size(double.infinity, 50),
+                      // minimumSize: const Size(double.infinity, 50),
+                      // maximumSize: const Size(double.infinity, 50),
+                      fixedSize: Size(350, 50),
                     ),
                   ),
                 ),

@@ -32,7 +32,7 @@ class ProductCard extends StatelessWidget {
         children: [
           Text(title, style: Theme.of(context).textTheme.titleMedium),
           Text("\$$price", style: Theme.of(context).textTheme.bodySmall),
-          Image.asset(image, height: 160),
+          Align(child: Image.asset(image, height: 160)),
           // Image(image: AssetImage(image), height: 160),
         ],
       ),
