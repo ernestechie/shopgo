@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app_flutter/cart_provider.dart';
 import 'package:shopping_app_flutter/global_variables.dart';
 
 class ProductDetailsPage extends StatefulWidget {
@@ -10,13 +12,25 @@ class ProductDetailsPage extends StatefulWidget {
   State<ProductDetailsPage> createState() => ProductDetailsPageState();
 }
 
+// The "State" class we extend, gives access to the "context" property, which is not available in StateLess widget.
 class ProductDetailsPageState extends State<ProductDetailsPage> {
   int selectedSizeIndex = 0;
 
+  // Select product size
   void handleSelectSize(int size) {
     setState(() {
       selectedSizeIndex = size;
     });
+  }
+
+  // Add product to cart
+  void onAddToCart() {
+    Provider.of<CartProvider>(
+      context,
+      listen: false,
+    ).addProduct(widget.product);
+
+    print("hello");
   }
 
   @override
@@ -99,7 +113,7 @@ class ProductDetailsPageState extends State<ProductDetailsPage> {
                       size: 20,
                       color: Colors.white,
                     ),
-                    onPressed: () {},
+                    onPressed: onAddToCart,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
                       minimumSize: const Size(double.infinity, 50),

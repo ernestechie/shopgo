@@ -16,6 +16,24 @@ class Product {
   final List<int> sizes;
 }
 
+class CartItem {
+  CartItem({
+    required this.id,
+    required this.title,
+    required this.price,
+    required this.company,
+    required this.imageUrl,
+    required this.size,
+  });
+
+  final String id;
+  final String title;
+  final int price;
+  final String company;
+  final String imageUrl;
+  final int size;
+}
+
 final List<Product> products = [
   Product(
     id: '1',
